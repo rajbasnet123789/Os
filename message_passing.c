@@ -17,7 +17,12 @@ int main(){
     message.msg_type=1;
     if(fork()==0){
         strcpy(message.msg_text,"Message from child");
-        
+        msgsnd(msgid,&message,sizeof(message),0);
     }
-
+    else{
+        msgrcv(msgid,&message,sizeof(message),1,0);
+        printf("Prent read:%s\n",message.msg_text);
+        msgctl(msgid,IPC_RMID,NULL);
+    }
+    return 0;
 }
