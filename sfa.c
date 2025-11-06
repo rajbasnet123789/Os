@@ -13,7 +13,7 @@ int main() {
     printf("Enter number of files: ");
     scanf("%d", &n);
 
-    file f[n]; // Variable-length array (C99 feature)
+    file f[n]; 
 
     printf("Enter details: <file_no> <file_name> <start_index> <block_size>\n");
     for (int i = 0; i < n; i++) {
