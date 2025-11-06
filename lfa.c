@@ -44,6 +44,7 @@ void print_files(file* head) {
 
 int main() {
     int n;
+    bool block[100000]=false;
     printf("Enter number of files: ");
     scanf("%d", &n);
 
@@ -54,12 +55,31 @@ int main() {
         int file_no, start_in, block_size;
         char file_name[20];
         scanf("%d %19s %d %d", &file_no, file_name, &start_in, &block_size);
+        while(1){
+            int flag=0;
+            for(int j=start_in;j<start_in+block_size;j++){
+                if(block[j]==true){
+                    flag=1;
+                    break;
+                }
+            }
+            if(flag==1){
+                printf("Blocks from %d to %d are already allocated. Enter a different starting index: ", start_in, start_in+block_size-1);
+                scanf("%d", &start_in);
+            }
+            else{
+                for(int j=start_in;j<start_in+block_size;j++){
+                    block[j]=true;
+                }
+                break;
+            }
+        }
         insert_at_tail(&head, file_no, file_name, start_in, block_size);
     }
 
     printf("\nFile Details:\n");
     print_files(head);
-
+    
    
 
     return 0;
